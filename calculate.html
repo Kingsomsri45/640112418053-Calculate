@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone Style Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        .calculator {
+            width: 300px;
+            background-color: #222;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .display {
+            background-color: #444;
+            color: #fff;
+            font-size: 2em;
+            text-align: right;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .button {
+            background-color: #555;
+            color: #fff;
+            font-size: 1.5em;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .button:active {
+            background-color: #777;
+        }
+        .button.operator {
+            background-color: #f09a36;
+            color: #fff;
+        }
+        .button.zero {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <div class="button" onclick="clearDisplay()">C</div>
+            <div class="button" onclick="appendToDisplay('/')">÷</div>
+            <div class="button" onclick="appendToDisplay('*')">x</div>
+            <div class="button operator" onclick="appendToDisplay('-')">-</div>
+            <div class="button" onclick="appendToDisplay('7')">7</div>
+            <div class="button" onclick="appendToDisplay('8')">8</div>
+            <div class="button" onclick="appendToDisplay('9')">9</div>
+            <div class="button operator" onclick="appendToDisplay('+')">+</div>
+            <div class="button" onclick="appendToDisplay('4')">4</div>
+            <div class="button" onclick="appendToDisplay('5')">5</div>
+            <div class="button" onclick="appendToDisplay('6')">6</div>
+            <div class="button operator" onclick="calculateResult()">=</div>
+            <div class="button" onclick="appendToDisplay('1')">1</div>
+            <div class="button" onclick="appendToDisplay('2')">2</div>
+            <div class="button" onclick="appendToDisplay('3')">3</div>
+            <div class="button zero" onclick="appendToDisplay('0')">0</div>
+            <div class="button" onclick="appendToDisplay('.')">.</div>
+        </div>
+    </div>
+
+    
+
+    <script>
+        function clearDisplay() {
+            document.getElementById('display').innerText = '0';
+        }
+
+        function appendToDisplay(value) {
+            const display = document.getElementById('display');
+            if (display.innerText === '0') {
+                display.innerText = value;
+            } else {
+                display.innerText += value;
+            }
+        }
+
+        function calculateResult() {
+            const display = document.getElementById('display');
+            try {
+                display.innerText = eval(display.innerText);
+            } catch {
+                display.innerText = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
